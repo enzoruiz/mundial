@@ -8,6 +8,9 @@ class Grupo(models.Model):
 	def __str__(self):
 		return "GRUPO " + self.letra
 
+	def __unicode__(self):
+		return "GRUPO " + self.letra
+
 class Equipo(models.Model):
 	pais = models.CharField(max_length=45)
 	pj = models.IntegerField(null=True, blank=True)
@@ -20,6 +23,9 @@ class Equipo(models.Model):
 	def __str__(self):
 		return self.pais
 
+	def __unicode__(self):
+		return self.pais
+
 class Encuentro(models.Model):
 	local = models.ForeignKey(Equipo, related_name="equipo_local")
 	visita = models.ForeignKey(Equipo, related_name="equipo_visita")
@@ -28,4 +34,7 @@ class Encuentro(models.Model):
 	fecha = models.DateTimeField()
 
 	def __str__(self):
+		return self.local.pais + " vs " + self.visita.pais + " - " + self.fecha.strftime('%d-%m-%Y - %H:%M')
+
+	def __unicode__(self):
 		return self.local.pais + " vs " + self.visita.pais + " - " + self.fecha.strftime('%d-%m-%Y - %H:%M')
